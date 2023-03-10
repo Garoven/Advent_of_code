@@ -3,7 +3,7 @@ use std::{error::Error, fs::read_to_string };
 
 fn main() -> Result<(), Box<dyn Error>> {
     let prio: Vec<(usize, char)> = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".chars().enumerate().collect();
-    let input = read_to_string("./2020/day_3/input")?;
+    let input = read_to_string("./2022/day_3/input")?;
     let mut lines = input.lines();
     let mut points: usize = 0;
     while let Ok(line) = lines.next_chunk::<3>() {

@@ -1,7 +1,7 @@
 use std::{error::Error, fs::read_to_string};
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let input = read_to_string("./2020/day_1/input")?;
+    let input = read_to_string("./2022/day_1/input")?;
     let mut lines = input.lines().into_iter();
     let mut elfs: Vec<usize> = Vec::new();
     let mut elf: usize = 0;

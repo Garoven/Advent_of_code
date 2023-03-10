@@ -32,7 +32,7 @@ impl PartialOrd for RPS {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let input = read_to_string("./2020/day_2/input")?;
+    let input = read_to_string("./2022/day_2/input")?;
     let mut lines = input.lines();
     let mut points: usize = 0;
     while let Some(line) = lines.next() {
