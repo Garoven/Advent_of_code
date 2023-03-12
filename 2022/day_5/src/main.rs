@@ -1,12 +1,13 @@
 #![feature(iter_next_chunk)]
-use std::{error::Error, fs::read_to_string};
+use std::error::Error;
+
+const INPUT: &str = include_str!("../input");
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let input = read_to_string("./2022/day_5/input")?;
     let mut magazine: Vec<Vec<char>> = vec![vec![];9];
-    let mut lines = input.lines();
-    let mut pattern = lines.next_chunk::<8>().unwrap().into_iter().rev();
-    while let Some(line) = pattern.next() {
+    let mut lines = INPUT.lines();
+    let pattern = lines.next_chunk::<8>().unwrap().into_iter().rev();
+    for line in pattern {
         let line = format!("{line} ");
         let mut chars = line.chars();
         let mut i = 0;
@@ -21,8 +22,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut part_one = magazine.clone();
     let mut part_two = magazine.clone();
 
-    let mut lines = lines.skip(2);
-    while let Some(line) = lines.next() {
+    let lines = lines.skip(2);
+    for line in lines {
         let split: Vec<&str> = line.split_whitespace().collect();
         let count: usize = split[1].parse()?;
         let from: usize = split[3].parse()?;

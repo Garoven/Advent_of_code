@@ -1,11 +1,12 @@
-use std::{error::Error, fs::read_to_string};
+use std::error::Error;
+
+const INPUT: &str = include_str!("../input");
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let input = read_to_string("./2022/day_1/input")?;
-    let mut lines = input.lines().into_iter();
+    let lines = INPUT.lines();
     let mut elfs: Vec<usize> = Vec::new();
     let mut elf: usize = 0;
-    while let Some(line) = lines.next() {
+    for line in lines {
         if line.is_empty() {
             elfs.push(elf);
             elf = 0;

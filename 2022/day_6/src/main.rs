@@ -1,8 +1,9 @@
-use std::{error::Error, fs::read_to_string, collections::VecDeque};
+use std::{error::Error, collections::VecDeque};
+
+const INPUT: &str = include_str!("../input");
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let input = read_to_string("./2022/day_6/input")?;
-    let chars: VecDeque<char> = input.chars().collect();
+    let chars: VecDeque<char> = INPUT.chars().collect();
     let mut i = 0usize;
 
     // Part one

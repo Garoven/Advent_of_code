@@ -1,29 +1,31 @@
-use std::{fs::read_to_string, error::Error, cmp::Ordering};
+use std::{error::Error, cmp::Ordering};
+
+const INPUT: &str = include_str!("../input");
 
 #[derive(PartialEq)]
-enum RPS {
-    ROCK,
-    PAPER,
-    SCISSORS
+enum Rps {
+    Rock,
+    Paper,
+    Scissors
 }
 
-impl PartialOrd for RPS {
+impl PartialOrd for Rps {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         let x = match self {
-            RPS::ROCK => match other {
-                RPS::ROCK => Ordering::Equal,
-                RPS::PAPER => Ordering::Less,
-                RPS::SCISSORS => Ordering::Greater
+            Rps::Rock => match other {
+                Rps::Rock => Ordering::Equal,
+                Rps::Paper => Ordering::Less,
+                Rps::Scissors => Ordering::Greater
             },
-            RPS::PAPER => match other {
-                RPS::ROCK => Ordering::Greater,
-                RPS::PAPER => Ordering::Equal,
-                RPS::SCISSORS => Ordering::Less
+            Rps::Paper => match other {
+                Rps::Rock => Ordering::Greater,
+                Rps::Paper => Ordering::Equal,
+                Rps::Scissors => Ordering::Less
             },
-            RPS::SCISSORS => match other {
-                RPS::ROCK => Ordering::Less,
-                RPS::PAPER => Ordering::Greater,
-                RPS::SCISSORS => Ordering::Equal
+            Rps::Scissors => match other {
+                Rps::Rock => Ordering::Less,
+                Rps::Paper => Ordering::Greater,
+                Rps::Scissors => Ordering::Equal
             }
 
         };
@@ -32,16 +34,15 @@ impl PartialOrd for RPS {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let input = read_to_string("./2022/day_2/input")?;
-    let mut lines = input.lines();
+    let lines = INPUT.lines();
     let mut points: usize = 0;
-    while let Some(line) = lines.next() {
-        let strat: Vec<&str> = line.split(" ").collect();
+    for line in lines {
+        let strat: Vec<&str> = line.split(' ').collect();
 
         let opponent = match strat[0] {
-            "A" => RPS::ROCK,
-            "B" => RPS::PAPER,
-            "C" => RPS::SCISSORS,
+            "A" => Rps::Rock,
+            "B" => Rps::Paper,
+            "C" => Rps::Scissors,
             i => return Err(format!("Invalid input: {i}").into())
 
         };
@@ -49,49 +50,49 @@ fn main() -> Result<(), Box<dyn Error>> {
         match strat[1] {
             "X" => {
                 match opponent {
-                    RPS::ROCK => {
+                    Rps::Rock => {
                         points += 3;
-                        RPS::SCISSORS
+                        Rps::Scissors
                     },
-                    RPS::PAPER => {
+                    Rps::Paper => {
                         points += 1;
-                        RPS::ROCK
+                        Rps::Rock
                     },
-                    RPS::SCISSORS => {
+                    Rps::Scissors => {
                         points += 2;
-                        RPS::PAPER
+                        Rps::Paper
                     }
                 }
             },
             "Y" => {
                 match opponent {
-                    RPS::ROCK => {
+                    Rps::Rock => {
                         points += 4;
-                        RPS::ROCK
+                        Rps::Rock
                     },
-                    RPS::PAPER => {
+                    Rps::Paper => {
                         points += 5;
-                        RPS::PAPER
+                        Rps::Paper
                     },
-                    RPS::SCISSORS => {
+                    Rps::Scissors => {
                         points += 6;
-                        RPS::SCISSORS
+                        Rps::Scissors
                     }
                 }
             },
             "Z" => {
                 match opponent {
-                    RPS::ROCK => {
+                    Rps::Rock => {
                         points += 8;
-                        RPS::PAPER
+                        Rps::Paper
                     },
-                    RPS::PAPER => {
+                    Rps::Paper => {
                         points += 9;
-                        RPS::SCISSORS
+                        Rps::Scissors
                     },
-                    RPS::SCISSORS => {
+                    Rps::Scissors => {
                         points += 7;
-                        RPS::ROCK
+                        Rps::Rock
                     }
                 }
             },
